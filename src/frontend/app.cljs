@@ -1,0 +1,19 @@
+(ns frontend.app
+  (:require
+   [reagent.dom :as rdom]
+   [re-frame.core as rf]
+   [frontend.views :as views]
+   [frontend.router :as router]))
+
+(defn app []
+  (let [current-page @(rf/subscribe [:current-page])]
+    (println "current-page =" current-page)
+    [:div
+     [views/pages current-page]]))
+
+(defn init []
+  (.log js/console "Initializing app")
+  (router/init-routes!)
+  (rf/dispatch-sync [:app/init])
+  (rf/dispatch [:server/connect])
+  (rdom/render [app] (.getElementById js/document "app")))
