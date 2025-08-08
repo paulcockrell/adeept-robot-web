@@ -7,7 +7,7 @@
 (def main-ring-handler
   (-> router/ring-routes
       (wrap-defaults site-defaults)
-      (wrap-cors :access-control-allow-origin [#"*.*"]))) ;; TODO restrict origin
+      (wrap-cors :access-control-allow-origin [#".*"]))) ;; TODO restrict origin
 
 (defonce web-server_ (atom nil))
 

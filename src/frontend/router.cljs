@@ -1,7 +1,7 @@
 (ns frontend.router
   (:require [reitit.frontend :as rf]
             [reitit.frontend.easy :as rfe]
-            [re-frame.code :as rfc]))
+            [re-frame.core :as rfc]))
 
 (def routes
   [["/" {:name :home}]])

@@ -1,7 +1,9 @@
 (ns frontend.app
   (:require
-   [reagent.dom :as rdom]
-   [re-frame.core as rf]
+   [reagent.dom.client :as rdomc]
+   [re-frame.core :as rf]
+   [frontend.subscriptions]
+   [frontend.events]
    [frontend.views :as views]
    [frontend.router :as router]))
 
@@ -11,9 +13,11 @@
     [:div
      [views/pages current-page]]))
 
+(defonce react-root (rdomc/create-root (.getElementById js/document "app")))
+
 (defn init []
   (.log js/console "Initializing app")
   (router/init-routes!)
   (rf/dispatch-sync [:app/init])
   (rf/dispatch [:server/connect])
-  (rdom/render [app] (.getElementById js/document "app")))
+  (rdomc/render react-root [app]))

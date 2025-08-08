@@ -1,6 +1,5 @@
 (ns backend.handlers
-  (:require [myapp.backend.arduino :as arduino]
-            [myapp.backend.socket :as socket]))
+  (:require [backend.socket :as socket]))
 
 (defmulti -event-msg-handler :id)
 
