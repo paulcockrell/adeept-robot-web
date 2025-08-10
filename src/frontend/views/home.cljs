@@ -5,7 +5,7 @@
 
 (defn on-mount []
   (js/console.log "Entering idle mode")
-  (rf/dispatch [:robot/mode-idle]))
+  (rf/dispatch [:command/mode-idle]))
 
 (defn home []
   (ra/with-let [_ (on-mount)]

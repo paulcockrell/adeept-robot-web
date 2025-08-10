@@ -7,25 +7,25 @@
   [{:as ev-msg :keys [id ?data event]}]
   (-event-msg-handler ev-msg))
 
-(defmethod -event-msg-handler :robot/mode-idle
+(defmethod -event-msg-handler :command/mode-idle
   [_]
   (println "Recieved request to put robot in idle mode")
-  (socket/broadcast! {:key :robot/mode :message :idle}))
+  (socket/broadcast! {:key :robot/mode-updated :message :idle}))
 
-(defmethod -event-msg-handler :robot/mode-manual
+(defmethod -event-msg-handler :command/mode-manual
   [_]
   (println "Recieved request to put robot in manual mode")
-  (socket/broadcast! {:key :robot/mode :message :manual}))
+  (socket/broadcast! {:key :robot/mode-updated :message :manual}))
 
-(defmethod -event-msg-handler :robot/mode-sentient
+(defmethod -event-msg-handler :command/mode-sentient
   [_]
   (println "Recieved request to put robot in sentient mode")
-  (socket/broadcast! {:key :robot/mode :message :sentient}))
+  (socket/broadcast! {:key :robot/mode-updated :message :sentient}))
 
-(defmethod -event-msg-handler :robot/mode-programmable
+(defmethod -event-msg-handler :command/mode-programmable
   [_]
   (println "Recieved request to put robot in programmable mode")
-  (socket/broadcast! {:key :robot/mode :message :programmable}))
+  (socket/broadcast! {:key :robot/mode-updated :message :programmable}))
 
 (defmethod -event-msg-handler :chsk/ws-ping
   [{:keys [event id ?data ring-req ?reply-fn send-fn]}]

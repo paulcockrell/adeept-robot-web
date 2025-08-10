@@ -30,3 +30,7 @@
 (defmethod -event-msg-handler :chsk/handshake
   [_]
   (println "Websocket handshake received"))
+
+(defmethod -event-msg-handler :robot/mode-updated
+  [{:keys [?data]}]
+  (rf/dispatch [:robot/mode-updated ?data]))

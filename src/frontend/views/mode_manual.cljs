@@ -5,7 +5,7 @@
 
 (defn on-mount []
   (js/console.log "Entering manual mode")
-  (rf/dispatch [:robot/mode-manual]))
+  (rf/dispatch [:command/mode-manual]))
 
 (defn on-dismount []
   (js/console.log "Leaving manual mode"))

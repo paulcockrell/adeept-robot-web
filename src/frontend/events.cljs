@@ -9,7 +9,8 @@
     :current-page :home
     :server {:connection :closed ;; server websocket connection can be either open opening closed
              :timeout-id nil ;; connection timeout timer id
-             }}))
+             }
+    :robot {:mode :idle}}))
 
 (reg-event-db
  :app/alert-set
@@ -53,21 +54,36 @@
     :dispatch-later [{:ms 1000 :dispatch [:server/connection-timeout]}]}))
 
 (reg-event-fx
- :robot/mode-idle
+ :command/mode-idle
  (fn [_ _]
-   {:dispatch [:app/alert-set {:type "warning" :message "Robot has entered idle mode"}]}))
+   (client/send! :command/mode-idle {})
+   {}))
 
 (reg-event-fx
- :robot/mode-manual
+ :command/mode-manual
  (fn [_ _]
-   {:dispatch [:app/alert-set {:type "warning" :message "Robot has entered manual mode"}]}))
+   (client/send! :command/mode-manual {})
+   {}))
 
 (reg-event-fx
- :robot/mode-sentient
+ :command/mode-sentient
  (fn [_ _]
-   {:dispatch [:app/alert-set {:type "warning" :message "Robot has entered sentient mode"}]}))
+   (client/send! :command/mode-sentient {})
+   {}))
 
 (reg-event-fx
- :robot/mode-programmable
+ :command/mode-programmable
  (fn [_ _]
-   {:dispatch [:app/alert-set {:type "warning" :message "Robot has entered programmable mode"}]}))
+   (client/send! :command/mode-programmable {})
+   {}))
+
+(reg-event-fx
+ :robot/mode-updated
+ (fn [_ [_ mode]]
+   {:dispatch-n [[:app/alert-set {:type "warning" :message (str "Robot has entered " (name mode) " mode")}]
+                 [:state-update/robot-mode {:mode mode}]]}))
+
+(reg-event-db
+ :state-update/robot-mode
+ (fn [db [_ {:keys [mode]}]]
+   (assoc-in db [:robot :mode] {:mode mode})))

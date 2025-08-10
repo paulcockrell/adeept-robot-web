@@ -5,7 +5,7 @@
 
 (defn on-mount []
   (js/console.log "Entering programmable mode")
-  (rf/dispatch [:robot/mode-programmable]))
+  (rf/dispatch [:command/mode-programmable]))
 
 (defn on-dismount []
   (js/console.log "Leaving programmable mode"))

@@ -5,7 +5,7 @@
 
 (defn on-mount []
   (js/console.log "Entering sentient mode")
-  (rf/dispatch [:robot/mode-sentient]))
+  (rf/dispatch [:command/mode-sentient]))
 
 (defn on-dismount []
   (js/console.log "Leaving sentient mode"))
