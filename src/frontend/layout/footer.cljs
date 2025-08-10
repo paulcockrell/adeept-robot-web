@@ -19,8 +19,8 @@
     [:nav {:class "ribbon-buttons"}
      [nav-button :home "Home" "home"]
      [nav-button :mode-manual "Manual mode" "joystick"]
-     [nav-button :mode-auto "Automatic mode" "robot"]
-     [nav-button :mode-program "Programable mode" "laptop_car"]
+     [nav-button :mode-sentient "Sentient mode" "robot"]
+     [nav-button :mode-programmable "Programable mode" "laptop_car"]
      [nav-button :settings "Settings" "settings_applications"]
      [nav-button :help "Help" "help"]
      [nav-button :about "About" "info"]]]])

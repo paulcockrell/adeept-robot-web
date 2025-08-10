@@ -6,8 +6,8 @@
 (def routes
   [["/" {:name :home}]
    ["/mode/manual" {:name :mode-manual}]
-   ["/mode/auto" {:name :mode-auto}]
-   ["/mode/program" {:name :mode-program}]
+   ["/mode/sentient" {:name :mode-sentient}]
+   ["/mode/programmable" {:name :mode-programmable}]
    ["/settings" {:name :settings}]
    ["/help" {:name :help}]
    ["/about" {:name :about}]])

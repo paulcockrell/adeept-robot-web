@@ -61,10 +61,11 @@ main {
 
       span.material-symbols-outlined {
         color: var(--pico-background-color);
-        font-size: calc(3 * var(--pico-font-size));
+        font-size: var(--pico-font-size);
         border-radius: 50%;
         padding: 1rem;
         background-color: var(--pico-primary);
+        margin-bottom: var(--pico-typography-spacing-vertical);
       }
     }
 
@@ -520,4 +521,8 @@ section {
   label {
     color: var(--pico-muted-color);
   }
+}
+
+.muted {
+  color: var(--pico-muted-color);
 }

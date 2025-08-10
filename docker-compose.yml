@@ -10,7 +10,8 @@ services:
     working_dir: /app
     tty: true
     stdin_open: true
-    command: /app/start.sh
+    command: >
+      sh -c "clojure -M -m backend.main"
 
   frontend:
     build: .

@@ -12,7 +12,7 @@
     [:span.material-symbols-outlined.pico-primary "close"]]])
 
 (defn alert-warning [message]
-  [:div.alert.pico-background-amber-50 {:role "alert"}
+  [:div.alert.pico-background-yellow-50 {:role "alert"}
    [:span.material-symbols-outlined.pico-color-amber-500
     "error"]
    [:span.pico-color-amber-500
