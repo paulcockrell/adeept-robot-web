@@ -7,13 +7,12 @@
    [frontend.views :as views]
    [frontend.router :as router]))
 
+(defonce react-root (rdomc/create-root (.getElementById js/document "app")))
+
 (defn app []
   (let [current-page @(rf/subscribe [:current-page])]
-    (println "current-page =" current-page)
     [:div
      [views/pages current-page]]))
-
-(defonce react-root (rdomc/create-root (.getElementById js/document "app")))
 
 (defn init []
   (.log js/console "Initializing app")

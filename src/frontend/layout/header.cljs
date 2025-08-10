@@ -17,8 +17,8 @@
      [:li
       [:h3
        [:span.material-symbols-outlined.heading-icon
-        "memory"]
-       "Robo-Console"]]]
+        "electric_car"]
+       "RoboConsole"]]]
     [:ul
      [:li
       [-server-connection-status]]]]])

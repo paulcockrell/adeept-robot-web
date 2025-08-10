@@ -4,7 +4,13 @@
             [re-frame.core :as rfc]))
 
 (def routes
-  [["/" {:name :home}]])
+  [["/" {:name :home}]
+   ["/mode/manual" {:name :mode-manual}]
+   ["/mode/auto" {:name :mode-auto}]
+   ["/mode/program" {:name :mode-program}]
+   ["/settings" {:name :settings}]
+   ["/help" {:name :help}]
+   ["/about" {:name :about}]])
 
 (defn on-navigate [new-match]
   (when new-match
