@@ -4,11 +4,11 @@
             [frontend.layout.layout :as layout]))
 
 (defn on-mount []
-  (js/console.log "Entering sentient mode")
+  (println "Entering sentient mode")
   (rf/dispatch [:command/mode-sentient]))
 
 (defn on-dismount []
-  (js/console.log "Leaving sentient mode"))
+  (println "Leaving sentient mode"))
 
 (defn mode-sentient []
   (ra/with-let [_ (on-mount)]

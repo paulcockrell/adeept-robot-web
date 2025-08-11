@@ -4,11 +4,11 @@
             [frontend.layout.layout :as layout]))
 
 (defn on-mount []
-  (js/console.log "Entering programmable mode")
+  (println "Entering programmable mode")
   (rf/dispatch [:command/mode-programmable]))
 
 (defn on-dismount []
-  (js/console.log "Leaving programmable mode"))
+  (println "Leaving programmable mode"))
 
 (defn mode-programmable []
   (ra/with-let [_ (on-mount)]

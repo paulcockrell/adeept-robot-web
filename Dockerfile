@@ -36,9 +36,6 @@ RUN npm install
 # Now copy the full app
 COPY . .
 
-# Ensure entrypoint is executable
-RUN chmod +x ./start.sh
-
 EXPOSE 3000 3001 9630
 
 CMD ["clojure", "-M", "-m", "backend.main"]

@@ -4,7 +4,7 @@
             [frontend.layout.layout :as layout]))
 
 (defn on-mount []
-  (js/console.log "Entering idle mode")
+  (println "Entering idle mode")
   (rf/dispatch [:command/mode-idle]))
 
 (defn home []

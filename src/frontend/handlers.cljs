@@ -2,7 +2,7 @@
   (:require [re-frame.core :as rf]))
 
 (defn log [message data]
-  (.log js/console message (.stringify js/JSON (clj->js data))))
+  (println message (.stringify js/JSON (clj->js data))))
 
 (defmulti -event-msg-handler :id)
 

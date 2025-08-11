@@ -4,11 +4,49 @@
             [frontend.layout.layout :as layout]))
 
 (defn on-mount []
-  (js/console.log "Entering manual mode")
+  (println "Entering manual mode")
   (rf/dispatch [:command/mode-manual]))
 
 (defn on-dismount []
-  (js/console.log "Leaving manual mode"))
+  (println "Leaving manual mode"))
+
+(defn command-button [opts]
+  (let [{:keys [command icon-name]} opts]
+    [:button
+     {:on-click #(rf/dispatch [command])}
+     [:span.material-symbols-outlined icon-name]]))
+
+(defn motor-controls []
+  [:div.circular-controller.pico-background-yellow-50
+   [:div.top
+    [command-button {:command :command/robot-forward
+                     :icon-name "arrow_drop_up"}]]
+   [:div.middle
+    [command-button {:command :command/robot-left
+                     :icon-name "arrow_left"}]
+    [command-button {:command :command/robot-right
+                     :icon-name "arrow_right"}]]
+   [:div.bottom
+    [command-button {:command :command/robot-backward
+                     :icon-name "arrow_drop_down"}]]])
+
+(defn camera-controls []
+  [:div.circular-controller.pico-background-yellow-50
+   [:div.top
+    [command-button {:command :command/camera-up
+                     :icon-name "arrow_drop_up"}]]
+   [:div.middle
+    [command-button {:command :command/camera-photo
+                     :icon-name "camera"}]
+    [command-button {:command :command/camera-photo
+                     :icon-name "camera"}]]
+
+   [:div.bottom
+    [command-button {:command :command/camera-down
+                     :icon-name "arrow_drop_down"}]]])
+
+(defn led-controls []
+  [:div.led-control "LED controls go here"])
 
 (defn mode-manual []
   (ra/with-let [_ (on-mount)]
@@ -21,7 +59,20 @@
         [:h1 "Manual mode"]
         [:small
          [:p.muted "Manual mode allows you to directly control the robots movements.
-            It will still avoid collisions automatically."]]]]]]
+            It will still avoid collisions automatically."]]]]
+      [:div.grid
+       [:article.motor-controls
+        [:header "Motor controls"]
+        [:div.body
+         [motor-controls]]]
+       [:article.camera-controls
+        [:header "Camera controls"]
+        [:div.body
+         [camera-controls]]]
+       [:article.led-controls
+        [:header "LED controls"]
+        [:div.body
+         [led-controls]]]]]]
 
     (finally (on-dismount))))
 

@@ -13,7 +13,7 @@
              :protocol :http})
 
 (defn state-watcher [_key _atom _old-state new-state]
-  (.warn js/console "New state" new-state))
+  (println "New state" new-state))
 
 (def ?csrf-token
   (when-let [el (.getElementById js/document "csrf-token")]

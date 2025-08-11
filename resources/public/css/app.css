@@ -526,3 +526,40 @@ section {
 .muted {
   color: var(--pico-muted-color);
 }
+
+.circular-controller {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  color: white;
+  /* USE FLEXBOX */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.circular-controller .top,
+.circular-controller .middle,
+.circular-controller .bottom {
+  display: flex;
+  flex-direction: row;
+}
+
+.circular-controller .top,
+.circular-controller .bottom {
+  justify-content: center;
+}
+
+.circular-controller .middle {
+  justify-content: space-between;
+}
+
+.circular-controller button {
+  display: flex;
+  justify-content: center;
+}
+
+section.mode-manual article .body {
+  display: flex;
+  justify-content: center;
+}

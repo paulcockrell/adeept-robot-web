@@ -15,7 +15,7 @@
      [views/pages current-page]]))
 
 (defn init []
-  (.log js/console "Initializing app")
+  (println "Initializing app")
   (router/init-routes!)
   (rf/dispatch-sync [:app/init])
   (rf/dispatch [:server/connect])
