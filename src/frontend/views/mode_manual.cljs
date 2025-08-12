@@ -37,8 +37,6 @@
                      :icon-name "arrow_drop_up"}]]
    [:div.middle
     [command-button {:command :command/camera-photo
-                     :icon-name "camera"}]
-    [command-button {:command :command/camera-photo
                      :icon-name "camera"}]]
 
    [:div.bottom
@@ -46,7 +44,17 @@
                      :icon-name "arrow_drop_down"}]]])
 
 (defn led-controls []
-  [:div.led-control "LED controls go here"])
+  [:div.led-control
+   [:fieldset
+    [:label
+     "Red"
+     [:input {:name "led-red" :type "range"}]]
+    [:label
+     "Green"
+     [:input {:name "led-green" :type "range"}]]
+    [:label
+     "Blue"
+     [:input {:name "led-blue" :type "range"}]]]])
 
 (defn mode-manual []
   (ra/with-let [_ (on-mount)]
