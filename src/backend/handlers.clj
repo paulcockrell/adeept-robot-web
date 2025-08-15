@@ -27,6 +27,16 @@
   (println "Recieved request to put robot in programmable mode")
   (socket/broadcast! {:key :robot/mode-updated :message :programmable}))
 
+(defmethod -event-msg-handler :command/robot-action
+  [{:keys [event id ?data ring-req ?reply-fn send-fn]}]
+  (when-let [action ?data]
+    (println "Recieved robot action" action)))
+
+(defmethod -event-msg-handler :command/camera-action
+  [{:keys [event id ?data ring-req ?reply-fn send-fn]}]
+  (when-let [action ?data]
+    (println "Recieved camera action" action)))
+
 (defmethod -event-msg-handler :chsk/ws-ping
   [{:keys [event id ?data ring-req ?reply-fn send-fn]}]
   (println  "RCV: " event))

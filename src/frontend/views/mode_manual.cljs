@@ -13,34 +13,35 @@
 (defn command-button [opts]
   (let [{:keys [command icon-name]} opts]
     [:button
-     {:on-click #(rf/dispatch [command])}
+     {:on-mouse-down #(rf/dispatch command)
+      :on-mouse-up #(rf/dispatch [:command/robot-action :stop])}
      [:span.material-symbols-outlined icon-name]]))
 
 (defn motor-controls []
   [:div.circular-controller.pico-background-yellow-50
    [:div.top
-    [command-button {:command :command/robot-forward
+    [command-button {:command [:command/robot-action :forward]
                      :icon-name "arrow_drop_up"}]]
    [:div.middle
-    [command-button {:command :command/robot-left
+    [command-button {:command [:command/robot-action :left]
                      :icon-name "arrow_left"}]
-    [command-button {:command :command/robot-right
+    [command-button {:command [:command/robot-action :right]
                      :icon-name "arrow_right"}]]
    [:div.bottom
-    [command-button {:command :command/robot-backward
+    [command-button {:command [:command/robot-action :down]
                      :icon-name "arrow_drop_down"}]]])
 
 (defn camera-controls []
   [:div.circular-controller.pico-background-yellow-50
    [:div.top
-    [command-button {:command :command/camera-up
+    [command-button {:command [:command/camera-action :up]
                      :icon-name "arrow_drop_up"}]]
    [:div.middle
-    [command-button {:command :command/camera-photo
+    [command-button {:command [:command/camera-action :take-photo]
                      :icon-name "camera"}]]
 
    [:div.bottom
-    [command-button {:command :command/camera-down
+    [command-button {:command [:command/camera-action :down]
                      :icon-name "arrow_drop_down"}]]])
 
 (defn led-controls []

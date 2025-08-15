@@ -87,3 +87,15 @@
  :state-update/robot-mode
  (fn [db [_ {:keys [mode]}]]
    (assoc-in db [:robot :mode] {:mode mode})))
+
+(reg-event-fx
+ :command/robot-action
+ (fn [_ [_ action]]
+   (client/send! :command/robot-action action)
+   {}))
+
+(reg-event-fx
+ :command/camera-action
+ (fn [_ [_ action]]
+   (client/send! :command/camera-action action)
+   {}))
