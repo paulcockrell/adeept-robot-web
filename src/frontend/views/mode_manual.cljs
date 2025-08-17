@@ -10,52 +10,72 @@
 (defn on-dismount []
   (println "Leaving manual mode"))
 
-(defn command-button [opts]
+(defn move-button [opts]
   (let [{:keys [command icon-name]} opts]
     [:button
      {:on-mouse-down #(rf/dispatch command)
       :on-mouse-up #(rf/dispatch [:command/robot-action :stop])}
      [:span.material-symbols-outlined icon-name]]))
 
+(defn camera-button [opts]
+  (let [{:keys [command icon-name]} opts]
+    [:button
+     {:on-mouse-down #(rf/dispatch command)}
+     [:span.material-symbols-outlined icon-name]]))
+
+(defn range-button [opts]
+  (let [{:keys [name command colour]} opts]
+    [:input {:name name
+             :type "range"
+             :on-change (fn [el]
+                          (let [value (.. el -target -value)]
+                            (rf/dispatch [command {:colour colour :value value}])))}]))
+
 (defn motor-controls []
   [:div.circular-controller.pico-background-yellow-50
    [:div.top
-    [command-button {:command [:command/robot-action :forward]
-                     :icon-name "arrow_drop_up"}]]
+    [move-button {:command [:command/robot-action :forward]
+                  :icon-name "arrow_drop_up"}]]
    [:div.middle
-    [command-button {:command [:command/robot-action :left]
-                     :icon-name "arrow_left"}]
-    [command-button {:command [:command/robot-action :right]
-                     :icon-name "arrow_right"}]]
+    [move-button {:command [:command/robot-action :left]
+                  :icon-name "arrow_left"}]
+    [move-button {:command [:command/robot-action :right]
+                  :icon-name "arrow_right"}]]
    [:div.bottom
-    [command-button {:command [:command/robot-action :down]
-                     :icon-name "arrow_drop_down"}]]])
+    [move-button {:command [:command/robot-action :down]
+                  :icon-name "arrow_drop_down"}]]])
 
 (defn camera-controls []
   [:div.circular-controller.pico-background-yellow-50
    [:div.top
-    [command-button {:command [:command/camera-action :up]
-                     :icon-name "arrow_drop_up"}]]
+    [camera-button {:command [:command/camera-action :up]
+                    :icon-name "arrow_drop_up"}]]
    [:div.middle
-    [command-button {:command [:command/camera-action :take-photo]
-                     :icon-name "camera"}]]
+    [camera-button {:command [:command/camera-action :take-photo]
+                    :icon-name "camera"}]]
 
    [:div.bottom
-    [command-button {:command [:command/camera-action :down]
-                     :icon-name "arrow_drop_down"}]]])
+    [camera-button {:command [:command/camera-action :down]
+                    :icon-name "arrow_drop_down"}]]])
 
 (defn led-controls []
   [:div.led-control
    [:fieldset
     [:label
      "Red"
-     [:input {:name "led-red" :type "range"}]]
+     [range-button {:name "led-red"
+                    :command :command/led-action
+                    :colour :red}]]
     [:label
      "Green"
-     [:input {:name "led-green" :type "range"}]]
+     [range-button {:name "led-green"
+                    :command :command/led-action
+                    :colour :green}]]
     [:label
      "Blue"
-     [:input {:name "led-blue" :type "range"}]]]])
+     [range-button {:name "led-blue"
+                    :command :command/led-action
+                    :colour :blue}]]]])
 
 (defn mode-manual []
   (ra/with-let [_ (on-mount)]

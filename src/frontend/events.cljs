@@ -99,3 +99,10 @@
  (fn [_ [_ action]]
    (client/send! :command/camera-action action)
    {}))
+
+(reg-event-fx
+ :command/led-action
+ (fn [_ [_ action]]
+   (println action)
+   (client/send! :command/led-action action)
+   {}))
